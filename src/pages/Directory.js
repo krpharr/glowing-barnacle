@@ -1,4 +1,7 @@
 import React from "react";
+import data from "../data/data";
+
+console.log(data);
 
 class Directory extends React.Component {
     state = {
