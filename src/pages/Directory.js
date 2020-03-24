@@ -1,16 +1,19 @@
 import React from "react";
+import SelectDepartment from "../components/SelectDepartment";
 import data from "../data/data";
 
 class Directory extends React.Component {
     state = {
         employees: data,
-        departments: []
+        departments: [],
+        department: "All",
+        inView: []
     };
 
     componentDidMount() {
-        const departments = [...new Set(this.state.employees.map(emp => emp.department))];
-        this.setState({departments: departments});
-        
+        const departments = [...new Set(data.map(emp => emp.department))];
+        departments.unshift("All");
+        this.setState({departments: departments});    
     }
 
     sort = (column) => {
@@ -30,9 +33,15 @@ class Directory extends React.Component {
         return filtered;
     };
 
+    handleDepartmentChange = event => {
+        console.log("handleDepartmentChange: ", event.target.value);
+        let empByDept = this.filter(event.target.value);
+        this.setState({inView: empByDept});
+    };
+
     mapEmployees = () =>  {
         console.log(this.state.departments);
-        let empListItems = this.sort("department").map(emp => {
+        let empListItems = this.sort("lastName").map(emp => {
             return (
                 <li key={emp.id}> 
                     <img alt={emp.email} src={emp.avatar}></img>
@@ -49,6 +58,11 @@ class Directory extends React.Component {
         return (
             <div>
                 <h1>Directory</h1>
+                <SelectDepartment 
+                    departments={this.state.departments} 
+                    handleDepartmentChange={this.handleDepartmentChange} 
+                    department={this.state.department}
+                />
                 <ul>
                     {this.mapEmployees()}
                 </ul>
