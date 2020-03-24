@@ -5,18 +5,33 @@ console.log(data);
 
 class Directory extends React.Component {
     state = {
-
+        employees: data
     };
+
+    componentDidMount() {
+        
+    }
+
+    mapEmployees = () =>  {
+        let empTable = this.state.employees.map(emp => {
+            return (
+                <div>
+                    <img alt={emp.email} src={emp.avatar}></img>
+                    <h2>{emp.firstName} {emp.lastName}</h2>
+                    <h4>{emp.department} | {emp.title}</h4>
+                    <span>{emp.email} {emp.phone}</span>
+                </div>
+            );
+        });
+        return empTable;
+    };
+    
 
     render(){
         return (
             <div>
                 <h1>Directory</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                    Similique at esse voluptates architecto, consequatur sed labore, 
-                    dolorum praesentium ipsum ut ipsam consequuntur quo eius eveniet autem 
-                    doloribus quis veritatis voluptas!
-                </p>
+                {this.mapEmployees()}
             </div>
         );
     }
