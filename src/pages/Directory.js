@@ -1,5 +1,6 @@
 import React from "react";
 import SelectDepartment from "../components/SelectDepartment";
+import SelectSort from "../components/SelectSort";
 import data from "../data/data";
 
 class Directory extends React.Component {
@@ -35,15 +36,21 @@ class Directory extends React.Component {
 
     handleDepartmentChange = event => {
         console.log("handleDepartmentChange: ", event.target.value);
-
         let empByDept = (event.target.value === "All" ? data : this.filter(event.target.value));
         console.log(empByDept);
         this.setState({currentList: empByDept});
     };
 
+    handleSortChange = event => {
+        console.log("handleSortChange: ", event.target.value);
+        let sorted = this.sort(event.target.value);
+        console.log(sorted);
+        this.setState({currentList: sorted});
+    };
+
     mapEmployees = () =>  {
         console.log(this.state.departments);
-        let empListItems = this.sort("lastName").map(emp => {
+        let empListItems = this.state.currentList.map(emp => {
             return (
                 <li key={emp.id}> 
                     <img alt={emp.email} src={emp.avatar}></img>
@@ -65,6 +72,8 @@ class Directory extends React.Component {
                     handleDepartmentChange={this.handleDepartmentChange} 
                     department={this.state.department}
                 />
+                <h2>Sort</h2>
+                <SelectSort handleSortChange={this.handleSortChange} />
                 <ul>
                     {this.mapEmployees()}
                 </ul>
