@@ -7,7 +7,7 @@ class Directory extends React.Component {
         employees: data,
         departments: [],
         department: "All",
-        inView: []
+        currentList: data
     };
 
     componentDidMount() {
@@ -17,7 +17,7 @@ class Directory extends React.Component {
     }
 
     sort = (column) => {
-        let sorted = this.state.employees.slice();
+        let sorted = this.state.currentList.slice();
         sorted.sort((a,b)=>{
             if(a[column] > b[column])return 1;
             if(a[column] < b[column])return -1;
@@ -27,7 +27,7 @@ class Directory extends React.Component {
     };
 
     filter = (department) => {
-        let filtered = this.state.employees.map(emp => {
+        let filtered = data.filter(emp => {
             return emp.department === department;
         });
         return filtered;
@@ -35,8 +35,10 @@ class Directory extends React.Component {
 
     handleDepartmentChange = event => {
         console.log("handleDepartmentChange: ", event.target.value);
-        let empByDept = this.filter(event.target.value);
-        this.setState({inView: empByDept});
+
+        let empByDept = (event.target.value === "All" ? data : this.filter(event.target.value));
+        console.log(empByDept);
+        this.setState({currentList: empByDept});
     };
 
     mapEmployees = () =>  {
@@ -57,7 +59,7 @@ class Directory extends React.Component {
     render(){
         return (
             <div>
-                <h1>Directory</h1>
+                <h1>Department</h1>
                 <SelectDepartment 
                     departments={this.state.departments} 
                     handleDepartmentChange={this.handleDepartmentChange} 
