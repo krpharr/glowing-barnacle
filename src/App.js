@@ -7,7 +7,7 @@ import Directory from "./pages/Directory";
 function App() {
   return (
     <Router>
-      <Navbar />
+      {/* <Navbar /> */}
       <Route exact path="/" component={Directory} />
     </Router>
   );

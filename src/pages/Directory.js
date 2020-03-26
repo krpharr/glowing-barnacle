@@ -1,6 +1,7 @@
 import React from "react";
 import SelectDepartment from "../components/SelectDepartment";
 import SelectSort from "../components/SelectSort";
+import EmployeeList from "../components/EmployeeList";
 import data from "../data/data";
 
 class Directory extends React.Component {
@@ -8,17 +9,19 @@ class Directory extends React.Component {
         employees: data,
         departments: [],
         department: "All",
-        currentList: data
+        sort: "lastName",
+        currentList: []
     };
 
     componentDidMount() {
         const departments = [...new Set(data.map(emp => emp.department))];
         departments.unshift("All");
-        this.setState({departments: departments});    
+        let currentList = this.sort(data, "lastName");
+        this.setState({departments: departments, currentList: currentList});    
     }
 
-    sort = (column) => {
-        let sorted = this.state.currentList.slice();
+    sort = (data, column) => {
+        let sorted = data.slice();
         sorted.sort((a,b)=>{
             if(a[column] > b[column])return 1;
             if(a[column] < b[column])return -1;
@@ -38,30 +41,31 @@ class Directory extends React.Component {
         console.log("handleDepartmentChange: ", event.target.value);
         let empByDept = (event.target.value === "All" ? data : this.filter(event.target.value));
         console.log(empByDept);
-        this.setState({currentList: empByDept});
+        empByDept = this.sort(empByDept, this.state.sort);
+        this.setState({department: event.target.value, currentList: empByDept});
     };
 
     handleSortChange = event => {
         console.log("handleSortChange: ", event.target.value);
-        let sorted = this.sort(event.target.value);
+        let sorted = this.sort(this.state.currentList, event.target.value);
         console.log(sorted);
-        this.setState({currentList: sorted});
+        this.setState({sort: event.target.value, currentList: sorted});
     };
 
-    mapEmployees = () =>  {
-        console.log(this.state.departments);
-        let empListItems = this.state.currentList.map(emp => {
-            return (
-                <li key={emp.id}> 
-                    <img alt={emp.email} src={emp.avatar}></img>
-                    <h2>{emp.firstName} {emp.lastName}</h2>
-                    <h4>{emp.department} | {emp.title}</h4>
-                    <span>{emp.email} {emp.phone}</span>
-                </li>
-            );
-        });
-        return empListItems;
-    };
+    // mapEmployees = () =>  {
+    //     console.log(this.state.departments);
+    //     let empListItems = this.state.currentList.map(emp => {
+    //         return (
+    //             <li key={emp.id}> 
+    //                 <img alt={emp.email} src={emp.avatar}></img>
+    //                 <h2>{emp.firstName} {emp.lastName}</h2>
+    //                 <h4>{emp.department} | {emp.title}</h4>
+    //                 <span>{emp.email} {emp.phone}</span>
+    //             </li>
+    //         );
+    //     });
+    //     return empListItems;
+    // };
     
     render(){
         return (
@@ -74,9 +78,10 @@ class Directory extends React.Component {
                 />
                 <h2>Sort</h2>
                 <SelectSort handleSortChange={this.handleSortChange} />
-                <ul>
+                <EmployeeList currentList={this.state.currentList} />
+                {/* <ul>
                     {this.mapEmployees()}
-                </ul>
+                </ul> */}
             </div>
         );
     }
