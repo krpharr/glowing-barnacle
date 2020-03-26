@@ -51,21 +51,6 @@ class Directory extends React.Component {
         console.log(sorted);
         this.setState({sort: event.target.value, currentList: sorted});
     };
-
-    // mapEmployees = () =>  {
-    //     console.log(this.state.departments);
-    //     let empListItems = this.state.currentList.map(emp => {
-    //         return (
-    //             <li key={emp.id}> 
-    //                 <img alt={emp.email} src={emp.avatar}></img>
-    //                 <h2>{emp.firstName} {emp.lastName}</h2>
-    //                 <h4>{emp.department} | {emp.title}</h4>
-    //                 <span>{emp.email} {emp.phone}</span>
-    //             </li>
-    //         );
-    //     });
-    //     return empListItems;
-    // };
     
     render(){
         return (
@@ -79,9 +64,6 @@ class Directory extends React.Component {
                 <h2>Sort</h2>
                 <SelectSort handleSortChange={this.handleSortChange} />
                 <EmployeeList currentList={this.state.currentList} />
-                {/* <ul>
-                    {this.mapEmployees()}
-                </ul> */}
             </div>
         );
     }

@@ -1,7 +1,7 @@
 import React from "react";
 
 function EmployeeList(props){
-    mapEmployees = () =>  {
+    const mapEmployees = () =>  {
         let empListItems = props.currentList.map(emp => {
             return (
                 <li key={emp.id}> 
@@ -14,9 +14,10 @@ function EmployeeList(props){
         });
         return empListItems;
     };
+
     return (
         <ul>
-            {this.mapEmployees()}
+            {mapEmployees()}
         </ul>
     );
 }
