@@ -51,6 +51,10 @@ class Directory extends React.Component {
         console.log(sorted);
         this.setState({sort: event.target.value, currentList: sorted});
     };
+
+    handleClickCard = event => {
+        console.log("handleClickCard: ", event.currentTarget);
+    };
     
     render(){
         return (
@@ -63,7 +67,7 @@ class Directory extends React.Component {
                 />
                 <h2>Sort</h2>
                 <SelectSort handleSortChange={this.handleSortChange} />
-                <EmployeeList currentList={this.state.currentList} />
+                <EmployeeList currentList={this.state.currentList} handleClickCard={this.handleClickCard}/>
             </div>
         );
     }

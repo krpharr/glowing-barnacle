@@ -19,6 +19,7 @@ function Card(props){
                     <div className="phone">{props.phone}</div>
                     <div className="email">{props.email}</div>
                 </div>
+                <div className="id">{props.id}</div>
             </div>            
         </div>
     );
