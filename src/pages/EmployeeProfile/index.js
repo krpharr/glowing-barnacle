@@ -9,11 +9,9 @@ class EmployeeProfile extends React.Component{
 
     componentDidMount(){
         const {id} = this.props.match.params;
-        // console.log(id);
         const employee = data.filter(e=> {
             return e.id === id;
         });
-        // console.log(employee);
         this.setState({employee: employee[0]});
         
     };
@@ -23,7 +21,8 @@ class EmployeeProfile extends React.Component{
 
         return(
             <div className="container">
-                <div className="row top-row">
+                 <h1 className="text-center">Sort Schmort, Inc.</h1>
+                <div className="row mt-2 top-row">
                     <div className="col-6">
                         <img className="image" src={avatar} alt={`${firstName} ${lastName}`}></img>
                     </div>

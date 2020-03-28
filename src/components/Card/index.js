@@ -15,10 +15,6 @@ function Card(props){
                         <div>{props.title}</div>
                     </div>
                 </div>
-                {/* <div className="col-4 fp">
-                    <div className="phone">{props.phone}</div>
-                    <div className="email">{props.email}</div>
-                </div> */}
                 <div className="id">{props.id}</div>
             </div>            
         </div>

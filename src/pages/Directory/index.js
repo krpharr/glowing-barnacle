@@ -61,7 +61,8 @@ class Directory extends React.Component {
     render(){
         return (
             <div className="container">
-                <div className="row">
+                 <h1 className="text-center">Sort Schmort, Inc.</h1>
+                <div className="row mt-2">
                     <div className="col-5">
                         <h5>Department:</h5>
                     </div>
