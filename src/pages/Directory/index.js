@@ -1,8 +1,9 @@
 import React from "react";
-import SelectDepartment from "../components/SelectDepartment";
-import SelectSort from "../components/SelectSort";
-import EmployeeList from "../components/EmployeeList";
-import data from "../data/data";
+import SelectDepartment from "../../components/SelectDepartment";
+import SelectSort from "../../components/SelectSort";
+import EmployeeList from "../../components/EmployeeList";
+import data from "../../data/data";
+import "./style.css";
 
 class Directory extends React.Component {
     state = {
@@ -59,15 +60,27 @@ class Directory extends React.Component {
     
     render(){
         return (
-            <div>
-                <h1>Department</h1>
-                <SelectDepartment 
-                    departments={this.state.departments} 
-                    handleDepartmentChange={this.handleDepartmentChange} 
-                    department={this.state.department}
-                />
-                <h2>Sort</h2>
-                <SelectSort handleSortChange={this.handleSortChange} />
+            <div className="container">
+                <div className="row">
+                    <div className="col-5">
+                        <h5>Department:</h5>
+                    </div>
+                    <div className="col-7">
+                        <SelectDepartment 
+                            departments={this.state.departments} 
+                            handleDepartmentChange={this.handleDepartmentChange} 
+                            department={this.state.department}
+                        />
+                    </div>                
+                </div>
+                <div className="row">
+                    <div className="col-12">
+                        <div className="select-sort">
+                            <div className="sort">Sort</div>
+                            <SelectSort department={this.state.department} handleSortChange={this.handleSortChange} />
+                        </div>                        
+                    </div>
+                </div>
                 <EmployeeList currentList={this.state.currentList} handleClickCard={this.handleClickCard}/>
             </div>
         );
