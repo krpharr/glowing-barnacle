@@ -52,8 +52,9 @@ class Directory extends React.Component {
         this.setState({sort: event.target.value, currentList: sorted});
     };
 
-    handleClickCard = event => {
-        console.log("handleClickCard: ", event.currentTarget);
+    handleClickCard = id => {
+        console.log("handleClickCard: ", id);
+        window.location = `/employee/${id}`;
     };
     
     render(){

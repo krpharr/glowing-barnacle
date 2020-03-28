@@ -6,7 +6,7 @@ function EmployeeList(props){
     const mapEmployees = () =>  {
         let empListItems = props.currentList.map(emp => {
             return (
-                <li key={emp.id} onClick={props.handleClickCard.bind(emp.id)}>
+                <li key={emp.id} onClick={()=>props.handleClickCard(emp.id)}>
                     <Card {...emp}/>
                 </li>
             );
