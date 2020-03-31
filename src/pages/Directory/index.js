@@ -7,7 +7,6 @@ import "./style.css";
 
 class Directory extends React.Component {
   state = {
-    employees: data,
     departments: [],
     department: "All",
     sort: "lastName",
