@@ -7,3 +7,4 @@ test("Directory snapshot test", () => {
   const tree = component.toJSON;
   expect(tree).toMatchSnapshot();
 });
+

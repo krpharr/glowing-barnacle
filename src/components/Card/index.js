@@ -1,7 +1,7 @@
-import React from "react";
-import "./style.css";
+import React from 'react';
+import './style.css';
 
-function Card(props){
+function Card(props) {
   return (
     <div className="card mb-3 mt-2">
       <div className="row">
@@ -16,7 +16,7 @@ function Card(props){
           </div>
         </div>
         <div className="id">{props.id}</div>
-      </div>            
+      </div>
     </div>
   );
 }
